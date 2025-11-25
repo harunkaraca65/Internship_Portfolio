@@ -5,145 +5,177 @@
 ## 🇹🇷 Türkçe Özet
 
 Bu depo, STM32 ve ESP32 mikrodenetleyicileri için geliştirilmiş çeşitli gömülü sistem projelerini içerir.
-Aşağıda projelerin teknik özetleri ve eşleşen klasör isimleri yer almaktadır.
-**Algoritma akışları, donanım konfigürasyonları ve detaylı açıklamalar için lütfen her projenin kendi klasöründeki README dosyasına bakınız.**
+Tüm projeler **'Demedukit'** eğitim ve geliştirme kartı esas alınarak gerçekleştirilmiştir.
+Aşağıda projelerin teknik özetleri ve ilgili depo (repository) isimleri yer almaktadır.
+**Algoritma akışları, donanım konfigürasyonları ve detaylı açıklamalar için lütfen ilgili deponun içindeki README dosyasına bakınız.**
 
 ## 🇬🇧 English Summary
 
 This repository contains various embedded systems projects developed for STM32 and ESP32 microcontrollers.
-Technical summaries of the projects and their corresponding folder names are listed below.
-**Please refer to the README file in each project's folder for algorithm flows, hardware configurations, and detailed descriptions.**
+All projects are implemented based on the **'Demedukit'** education and development board.
+Technical summaries of the projects and their corresponding repository names are listed below.
+**Please refer to the README file within the respective repository for algorithm flows, hardware configurations, and detailed descriptions.**
 
 ---
 
-### 1. `DEM_ESP_UART` - ESP-IDF Asenkron UART İletişimi
+### 1. `DEM_ACC_ANGLE`
 **TR:**
-Bu proje, ESP-IDF framework üzerinde çalışan ve UART iletişimini yöneten asenkron bir yapı sunar.
-Veri alma (RX) ve veri gönderme (TX) işlemleri için birbirinden bağımsız iki FreeRTOS görevi oluşturulmuştur.
-Sürekli veri dinleyen RX görevi ve periyodik gönderim yapan TX görevi sayesinde iletişim trafiği bloke edilmeden yönetilir.
-
-**EN:**
-This project presents an asynchronous structure running on the ESP-IDF framework managing UART communication.
-Two independent FreeRTOS tasks are created for data reception (RX) and data transmission (TX).
-Traffic is managed without blocking via the RX task that continuously listens for data and the TX task that transmits periodically.
-
-### 2. `DEM_STM_UART` - STM32 FreeRTOS Senkron UART Yönetimi
-**TR:**
-STM32 mikrodenetleyicisi üzerinde FreeRTOS kullanılarak geliştirilen bu proje, UART iletişimini senkron bir yapıda ele alır.
-Diğer ESP32 projesiyle karşılıklı haberleşmek ve el sıkışma (handshake) protokolünü uygulamak üzere tasarlanmıştır.
-Görevler arası senkronizasyon mekanizmaları kullanılarak veri akışının güvenliği ve sıralaması sağlanır.
-
-**EN:**
-Developed using FreeRTOS on an STM32 microcontroller, this project handles UART communication in a synchronous structure.
-It is designed to communicate mutually with the other ESP32 project and implement a handshake protocol.
-Data flow security and ordering are ensured using inter-task synchronization mechanisms.
-
-### 3. `DEM_MODBUS_STM_SLAVE` - STM32 Modbus RTU Slave Yazılımı
-**TR:**
-Bu yazılım, herhangi bir RTOS kullanmadan SysTick zamanlayıcısı ve kesmeler üzerine kurulu modüler bir Modbus RTU Slave uygulamasıdır.
-Modbus protokol işleme, uygulama mantığı ve donanım sürücüleri birbirinden izole edilerek temiz bir mimari oluşturulmuştur.
-Ana döngü engellemesiz (non-blocking) çalışarak sistemin sensör okuma ve iletişim görevlerini eş zamanlı yürütmesine olanak tanır.
-
-**EN:**
-This software is a modular Modbus RTU Slave application built on SysTick timer and interrupts without using any RTOS.
-Modbus protocol processing, application logic, and hardware drivers are isolated from each other creating a clean architecture.
-The main loop operates in a non-blocking manner allowing the system to execute sensor reading and communication tasks concurrently.
-
-### 4. `DEM_LOW_POWER` - STM32 Düşük Güç Modları Döngüsü
-**TR:**
-Bu proje, STM32'nin Sleep, Stop ve Standby gibi düşük güç modlarına giriş ve çıkış süreçlerini döngüsel olarak test eder.
-RTC (Gerçek Zamanlı Saat) alarmı, işlemciyi derin uyku durumlarından uyandırmak için bir tetikleyici olarak kullanılır.
-Sistemin hangi modda olduğu ve güç tüketim profilleri, üzerindeki LED göstergeleri aracılığıyla izlenebilir.
-
-**EN:**
-This project cyclically tests the entry and exit processes for STM32's low-power modes such as Sleep, Stop, and Standby.
-The RTC (Real-Time Clock) alarm is used as a trigger to wake the processor from deep sleep states.
-The system's current mode and power consumption profiles can be monitored via onboard LED indicators.
-
-### 5. `DEM_ADC_COMPARISON` - STM32 ADC Okuma Yöntemleri Karşılaştırması
-**TR:**
-Proje, STM32 ADC biriminden veri okumak için Polling, DMA Normal, DMA Circular ve Timer Trigger olmak üzere dört farklı yöntemi uygular.
-Her bir yöntemin işlemci yükü üzerindeki etkisi ve veri okuma verimliliği karşılaştırmalı olarak analiz edilir.
-Elde edilen veriler bellekteki tampon dizilere kaydedilerek farklı senaryolar için en uygun okuma stratejisi belirlenir.
-
-**EN:**
-The project implements four different methods for reading data from the STM32 ADC unit: Polling, DMA Normal, DMA Circular, and Timer Trigger.
-The impact on processor load and data reading efficiency of each method is analyzed comparatively.
-Acquired data is saved to buffer arrays in memory to determine the most suitable reading strategy for different scenarios.
-
-### 6. `DEM_HC-SR04` - HC-SR04 Ultrasonik Mesafe Ölçümü
-**TR:**
-Bu uygulama, HC-SR04 sensörü ile hassas mesafe ölçümü yapmak için donanım zamanlayıcılarının Input Capture özelliğini kullanır.
-Ortam sıcaklığı ADC üzerinden okunarak ses hızı hesaplamasına dahil edilir ve ölçüm sonuçları termal değişimlere göre kompanze edilir.
-One Pulse Mode ile tetiklenen sensör verileri işlenerek sonuçlar UART üzerinden seri port terminaline gönderilir.
-
-**EN:**
-This application uses the Input Capture feature of hardware timers to perform precise distance measurement with the HC-SR04 sensor.
-Ambient temperature is read via ADC and included in the speed of sound calculation to compensate measurement results for thermal changes.
-Sensor data triggered via One Pulse Mode is processed and results are sent to the serial port terminal via UART.
-
-### 7. `DEM_ACC_ANGLE` - STM32 LIS2DW12 Eğim Ölçer
-**TR:**
-Proje, LIS2DW12 ivmeölçer sensöründen I2C protokolü ile ham veri okuyarak Roll ve Pitch açılarını hesaplar.
+Bu proje, LIS2DW12 ivmeölçer sensöründen I2C protokolü ile ham veri okur.
+Okunan verilerden Roll ve Pitch açılarını hesaplar.
 Hesaplanan açı değerleri, ana döngüyü meşgul etmemek adına kesme tabanlı bir UART iletimi ile dış dünyaya aktarılır.
-Cihazın eğim durumu belirli eşik değerlerini aştığında uyarı LED'leri aktif hale getirilerek görsel geri bildirim sağlanır.
+Cihazın eğim durumu belirli eşik değerlerini aştığında uyarı LED'leri aktif hale getirilir.
 
 **EN:**
-The project calculates Roll and Pitch angles by reading raw data from the LIS2DW12 accelerometer sensor via the I2C protocol.
+This project reads raw data from the LIS2DW12 accelerometer sensor via the I2C protocol.
+It calculates Roll and Pitch angles from the read data.
 Calculated angle values are transmitted externally via interrupt-based UART transmission to avoid stalling the main loop.
-Warning LEDs are activated to provide visual feedback when the device's tilt status exceeds certain threshold values.
+Warning LEDs are activated when the device's tilt status exceeds certain threshold values.
 
-### 8. `DEM_FREERTOS_STM` - STM32 FreeRTOS Çoklu Görev Sensör Yönetimi
+🔗 **Repo:** [harunkaraca65/DEM_ACC_ANGLE](https://github.com/harunkaraca65/DEM_ACC_ANGLE)
+
+---
+
+### 2. `DEM_ADC_COMPARISON`
 **TR:**
-Bu kapsamlı FreeRTOS uygulaması, ADC okuma, İvmeölçer verisi işleme, OLED ekran güncelleme ve UART iletişimi gibi görevleri eş zamanlı yönetir.
-Görevler arasındaki veri transferi kuyruklar (Queues) aracılığıyla sağlanırken, paylaşılan donanım kaynakları Mutex ile korunur.
-Sistem ayrıca arka planda çalışan bir yazılım zamanlayıcısı ile sensör verilerinden bağımsız görsel animasyonlar yürütür.
+Proje, STM32 ADC biriminden veri okumak için dört farklı yöntemi karşılaştırır.
+Polling, DMA Normal, DMA Circular ve Timer Trigger yöntemlerini uygular.
+Her bir yöntemin işlemci yükü üzerindeki etkisi analiz edilir.
+Elde edilen veriler bellekteki tampon dizilere kaydedilerek en uygun okuma stratejisi belirlenir.
 
 **EN:**
-This comprehensive FreeRTOS application concurrently manages tasks such as ADC reading, Accelerometer data processing, OLED display updating, and UART communication.
-Data transfer between tasks is facilitated via Queues, while shared hardware resources are protected by Mutexes.
-The system also executes visual animations independent of sensor data via a software timer running in the background.
+The project compares four different methods for reading data from the STM32 ADC unit.
+It implements Polling, DMA Normal, DMA Circular, and Timer Trigger methods.
+The impact of each method on processor load is analyzed.
+Acquired data is saved to buffer arrays in memory to determine the most suitable reading strategy.
 
-### 9. `DEM_CONNECT_WIFI` - ESP32 Wi-Fi & ThingSpeak Menü Sistemi
+🔗 **Repo:** [harunkaraca65/DEM_ADC_COMPARISON](https://github.com/harunkaraca65/DEM_ADC_COMPARISON)
+
+---
+
+### 3. `DEM_UART`
 **TR:**
-Arduino altyapısı üzerinde geliştirilen bu proje, ESP32'nin kalıcı hafızasını kullanarak Wi-Fi ve API bilgilerini saklar.
-Kullanıcıya seri port üzerinden sunulan interaktif menü sayesinde otomatik bağlantı veya yeni kurulum seçenekleri sunulur.
-Bağlantı sağlandığında üretilen sensör verileri, güvenli bir şekilde ThingSpeak bulut platformuna periyodik olarak gönderilir.
+Bu depo, UART iletişimi üzerine kurulu iki ilişkili projeyi (STM32 ve ESP32) barındırır.
+**ESP32 Tarafı:** ESP-IDF üzerinde çalışan asenkron bir yapı sunar; RX ve TX işlemleri için bağımsız FreeRTOS görevleri kullanır.
+**STM32 Tarafı:** FreeRTOS üzerinde çalışan senkron bir yapı sunar ve ESP32 ile "El Sıkışma" (Handshake) protokolü yürütür.
+İki proje birbiriyle haberleşerek veri akışını ve senkronizasyonu test eder.
 
 **EN:**
-Developed on the Arduino infrastructure, this project stores Wi-Fi and API credentials using ESP32's persistent memory.
-Automatic connection or new setup options are offered via an interactive menu presented to the user through the serial port.
-Once connected, generated sensor data is periodically sent securely to the ThingSpeak cloud platform.
+This repository hosts two related projects (STM32 and ESP32) based on UART communication.
+**ESP32 Side:** Presents an asynchronous structure on ESP-IDF; uses independent FreeRTOS tasks for RX and TX operations.
+**STM32 Side:** Presents a synchronous structure on FreeRTOS and executes a "Handshake" protocol with the ESP32.
+The two projects communicate with each other to test data flow and synchronization.
 
-### 10. `DEM_FREERTOS_ESP` - ESP32 UART - MQTT Ağ Geçidi
+🔗 **Repo:** [harunkaraca65/DEM_UART](https://github.com/harunkaraca65/DEM_UART)
+
+---
+
+### 4. `DEM_HC-SR04`
 **TR:**
-Bu proje, STM32 gibi harici bir kaynaktan UART üzerinden gelen sensör verilerini alıp MQTT protokolüne dönüştüren bir ağ geçididir.
-Gelen veriler ayrıştırılıp JSON formatına çevrildikten sonra belirlenen bir MQTT sunucusuna (Broker) yayınlanır.
-Wi-Fi veya MQTT bağlantısında kopma yaşanması durumunda sistem otomatik olarak yeniden bağlanma prosedürlerini devreye sokar.
+Bu uygulama, HC-SR04 sensörü ile hassas mesafe ölçümü yapar.
+Donanım zamanlayıcılarının Input Capture özelliğini kullanır.
+Ortam sıcaklığı ADC üzerinden okunarak ses hızı hesaplamasına dahil edilir.
+Ölçüm sonuçları termal değişimlere göre kompanze edilerek UART üzerinden gönderilir.
 
 **EN:**
-This project is a gateway that receives sensor data via UART from an external source like STM32 and converts it to the MQTT protocol.
-Incoming data is parsed, converted to JSON format, and then published to a specified MQTT Broker.
-In case of Wi-Fi or MQTT connection loss, the system automatically activates reconnection procedures.
+This application performs precise distance measurement with the HC-SR04 sensor.
+It uses the Input Capture feature of hardware timers.
+Ambient temperature is read via ADC and included in the speed of sound calculation.
+Measurement results are compensated for thermal changes and sent via UART.
 
-### 11. `DEM_ESP_MQTT` - ESP-IDF Akıllı Wi-Fi ve MQTT Kurulumu
+🔗 **Repo:** [harunkaraca65/DEM_HC-SR04](https://github.com/harunkaraca65/DEM_HC-SR04)
+
+---
+
+### 5. `DEM_LOW_POWER`
 **TR:**
-ESP-IDF ile geliştirilen bu güncel IoT projesi, NVS (Flash) belleği kullanarak ağ kimlik bilgilerini kalıcı olarak saklar.
+Bu proje, STM32'nin düşük güç modlarına (Sleep, Stop, Standby) giriş ve çıkış süreçlerini test eder.
+RTC (Gerçek Zamanlı Saat) alarmı, işlemciyi derin uyku durumlarından uyandırmak için tetikleyici olarak kullanılır.
+Döngüsel olarak değişen güç modları ve sistem durumu LED göstergeleri ile izlenir.
+
+**EN:**
+This project tests the entry and exit processes for STM32's low-power modes (Sleep, Stop, Standby).
+The RTC (Real-Time Clock) alarm is used as a trigger to wake the processor from deep sleep states.
+Cyclically changing power modes and system status are monitored via LED indicators.
+
+🔗 **Repo:** [harunkaraca65/DEM_LOW_POWER](https://github.com/harunkaraca65/DEM_LOW_POWER)
+
+---
+
+### 6. `DEM_THINKSPEAK`
+**TR:**
+Arduino altyapısı üzerinde geliştirilen bu proje, ESP32 için bir IoT menü sistemidir.
+Kalıcı hafızayı (Preferences) kullanarak Wi-Fi ve API bilgilerini saklar.
+Seri port üzerinden sunulan interaktif menü ile otomatik bağlantı veya yeni kurulum seçenekleri sunar.
+Bağlantı sağlandığında sensör verilerini ThingSpeak bulut platformuna gönderir.
+
+**EN:**
+Developed on the Arduino infrastructure, this project is an IoT menu system for ESP32.
+It stores Wi-Fi and API credentials using persistent memory (Preferences).
+Offers automatic connection or new setup options via an interactive menu presented through the serial port.
+Sends sensor data to the ThingSpeak cloud platform once connected.
+
+🔗 **Repo:** [harunkaraca65/DEM_THINKSPEAK](https://github.com/harunkaraca65/DEM_THINKSPEAK)
+
+---
+
+### 7. `DEM_MQTT`
+**TR:**
+ESP-IDF ile geliştirilen bu güncel IoT projesi, NVS (Flash) belleği kullanarak ağ bilgilerini saklar.
 Sistem açılışında kayıtlı ağlara otomatik bağlanmayı dener veya kullanıcıya interaktif bir kurulum sihirbazı sunar.
-Bağlantı başarıyla kurulduğunda rastgele üretilen veriler periyodik olarak yapılandırılmış MQTT konusuna yayınlanır.
+Bağlantı başarıyla kurulduğunda rastgele üretilen veriler yapılandırılmış MQTT konusuna yayınlanır.
 
 **EN:**
-Developed with ESP-IDF, this current IoT project persistently stores network credentials using NVS (Flash) memory.
-Upon system startup, it attempts to automatically connect to saved networks or offers an interactive setup wizard to the user.
-Once the connection is successfully established, randomly generated data is periodically published to the configured MQTT topic.
+Developed with ESP-IDF, this current IoT project stores network credentials using NVS (Flash) memory.
+Upon startup, it attempts to automatically connect to saved networks or offers an interactive setup wizard to the user.
+Once the connection is established, randomly generated data is published to the configured MQTT topic.
 
-### 12. `DEM_MCS_CHRONOMETER` - STM32 Master-Slave Timer Kronometre
+🔗 **Repo:** [harunkaraca65/DEM_MQTT](https://github.com/harunkaraca65/DEM_MQTT)
+
+---
+
+### 8. `DEM_FREERTOS`
 **TR:**
-Bu uygulama, iki adet donanım zamanlayıcısını (TIM3 ve TIM1) zincirleyerek mikro saniye hassasiyetinde çalışan bir kronometre oluşturur.
-Master ve Slave modunda çalışan zamanlayıcılar sayesinde yazılım yükü olmadan 32-bit genişliğinde zaman takibi yapılır.
-Kullanıcı butonları ile başlatma, durdurma, tur (lap) kaydı alma ve sistemi sıfırlama işlevleri bir durum makinesi ile yönetilir.
+Bu depo, hem STM32 hem de ESP32 için gelişmiş FreeRTOS uygulamalarını içerir.
+**STM32 Tarafı:** ADC, İvmeölçer, OLED ekran ve UART görevlerini yöneten çoklu görev (multitasking) sensör sistemidir; Mutex ve Kuyruk yapılarını kullanır.
+**ESP32 Tarafı:** STM32'den UART ile gelen veriyi alıp JSON formatına çeviren ve MQTT üzerinden sunucuya ileten bir "Ağ Geçidi" (Gateway) yazılımıdır.
+İki proje birleşerek uçtan uca (STM32 -> ESP32 -> Bulut) bir IoT sistemini oluşturur.
 
 **EN:**
-This application creates a microsecond-precision chronometer by chaining two hardware timers (TIM3 and TIM1).
-Timers operating in Master and Slave modes allow for 32-bit wide time tracking without software overhead.
-Start, stop, lap recording, and system reset functions via user buttons are managed by a state machine.
+This repository contains advanced FreeRTOS applications for both STM32 and ESP32.
+**STM32 Side:** A multitasking sensor system managing ADC, Accelerometer, OLED display, and UART tasks; utilizes Mutex and Queue structures.
+**ESP32 Side:** A "Gateway" software that receives data via UART from STM32, converts it to JSON, and transmits it via MQTT.
+The two projects combine to form an end-to-end (STM32 -> ESP32 -> Cloud) IoT system.
+
+🔗 **Repo:** [harunkaraca65/DEM_FREERTOS](https://github.com/harunkaraca65/DEM_FREERTOS)
+
+---
+
+### 9. `DEM_MCS_CHRONOMETER`
+**TR:**
+Bu uygulama, iki adet donanım zamanlayıcısını (Master-Slave) zincirleyerek mikro saniye hassasiyetinde çalışan bir kronometre oluşturur.
+Zamanlayıcıların donanımsal zincirlenmesi sayesinde yazılım yükü olmadan 32-bit genişliğinde zaman takibi yapılır.
+Başlatma, durdurma, tur (lap) kaydı alma ve sistemi sıfırlama işlevleri bir durum makinesi ile yönetilir.
+
+**EN:**
+This application creates a microsecond-precision chronometer by chaining two hardware timers (Master-Slave).
+Hardware chaining allows for 32-bit wide time tracking without software overhead.
+Start, stop, lap recording, and system reset functions are managed by a state machine.
+
+🔗 **Repo:** [harunkaraca65/DEM_MCS_CHRONOMETER](https://github.com/harunkaraca65/DEM_MCS_CHRONOMETER)
+
+---
+
+### 10. `DEM_MODBUS`
+**TR:**
+Bu yazılım, RTOS kullanmadan SysTick ve kesmeler üzerine kurulu modüler bir Modbus RTU Slave uygulamasıdır.
+Protokol işleme, uygulama mantığı ve donanım sürücüleri birbirinden izole edilmiştir.
+Ana döngü engellemesiz (non-blocking) çalışarak sensör okuma ve iletişim görevlerini eş zamanlı yürütür.
+
+**EN:**
+This software is a modular Modbus RTU Slave application built on SysTick and interrupts without using RTOS.
+Protocol processing, application logic, and hardware drivers are isolated from each other.
+The main loop operates in a non-blocking manner to execute sensor reading and communication tasks concurrently.
+
+🔗 **Repo:** [harunkaraca65/DEM_MODBUS](https://github.com/harunkaraca65/DEM_MODBUS)
+
+---
