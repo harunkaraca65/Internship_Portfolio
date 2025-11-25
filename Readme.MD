@@ -175,3 +175,42 @@ This software is built upon an interrupt-driven and non-blocking main loop archi
 🔗 **Repo:** [harunkaraca65/DEM_MODBUS](https://github.com/harunkaraca65/DEM_MODBUS)
 
 ---
+
+## 🚧 Devam Eden Çalışmalar / Works in Progress
+
+### 11. `STM32_WATCHDOG_TUTORIAL`
+**TR:**
+Sistem güvenilirliğini artırmak için kullanılan iki farklı Watchdog zamanlayıcısının (IWDG ve WWDG) detaylı analizini ve kullanımını içerir.
+Bağımsız (Independent) ve Pencereli (Window) Watchdog modüllerinin konfigürasyon farkları ve kullanım senaryoları (donanım hatası vs. yazılım kilitlenmesi) uygulamalı olarak karşılaştırılır.
+
+**EN:**
+Includes a detailed analysis and implementation of two different Watchdog timers (IWDG and WWDG) used to enhance system reliability.
+Configuration differences and use cases (hardware faults vs. software lockups) of Independent and Window Watchdog modules are compared practically.
+
+---
+
+### 12. `STM32_BARE_METAL`
+**TR:**
+Bu çalışma, hazır HAL kütüphaneleri kullanılmadan, doğrudan mikrodenetleyicinin kaydedicilerine (Registers) erişilerek yapılan programlamayı konu alır.
+GPIO yapılandırması, Clock ayarları ve çevresel birimlerin kontrolü "Bare Metal" yaklaşımıyla gerçekleştirilir.
+Bu sayede donanım üzerinde tam hakimiyet ve maksimum optimizasyon hedeflenir.
+
+**EN:**
+This work focuses on programming by directly accessing the microcontroller's registers without using ready-made HAL libraries.
+GPIO configuration, Clock settings, and peripheral control are performed using a "Bare Metal" approach.
+This aims for complete mastery over the hardware and maximum optimization.
+
+---
+
+### 13. `DEM_PLANE_SIM`
+**TR:**
+Bu final projesi, STM32 ve ESP32'nin birlikte çalıştığı kapsamlı bir uçuş simülasyon sistemidir.
+STM32 kartı, joystick ve sensör verilerini işleyerek bir uçuş kontrolcüsü (Flight Controller) gibi çalışır.
+Veriler UART üzerinden ESP32'ye aktarılır; ESP32 ise bu verileri Bluetooth aracılığıyla PC'ye iletir.
+PC tarafında Unity oyun motoru ile geliştirilen savaş uçağı simülasyonu, bu donanımdan gelen komutlarla gerçek zamanlı olarak kontrol edilir.
+
+**EN:**
+This final project is a comprehensive flight simulation system where STM32 and ESP32 work in tandem.
+The STM32 board acts as a Flight Controller by processing joystick and sensor inputs.
+Data is transferred to ESP32 via UART, which then transmits it to the PC via Bluetooth.
+On the PC side, a fighter jet simulation developed with the Unity game engine is controlled in real-time using commands from this hardware.
