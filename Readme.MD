@@ -176,18 +176,24 @@ This software is built upon an interrupt-driven and non-blocking main loop archi
 
 ---
 
-## 🚧 Devam Eden Çalışmalar / Works in Progress
-
-### 11. `STM32_WATCHDOG_TUTORIAL`
+### 11. `DEM_SENTINEL_MODE`
 **TR:**
-Sistem güvenilirliğini artırmak için kullanılan iki farklı Watchdog zamanlayıcısının (IWDG ve WWDG) detaylı analizini ve kullanımını içerir.
-Bağımsız (Independent) ve Pencereli (Window) Watchdog modüllerinin konfigürasyon farkları ve kullanım senaryoları (donanım hatası vs. yazılım kilitlenmesi) uygulamalı olarak karşılaştırılır.
+Bu proje, sistem güvenilirliğini artırmak için IWDG ve WWDG Watchdog zamanlayıcılarını hibrit bir yapıda kullanır.
+LDR sensörü ile değişken işlemci yükü simüle edilerek "Pencere İhlali" (Window Violation) senaryoları test edilir.
+Sistem açılışında "Reset Nedeni Analizi" (System Autopsy) yaparak hatanın kaynağını (Yazılım donması vs. Uyku modu hatası) raporlar.
+Ayrıca STOP modunda Watchdog yönetimi ile düşük güç tüketiminde sistem güvenliği sağlanır.
 
 **EN:**
-Includes a detailed analysis and implementation of two different Watchdog timers (IWDG and WWDG) used to enhance system reliability.
-Configuration differences and use cases (hardware faults vs. software lockups) of Independent and Window Watchdog modules are compared practically.
+This project utilizes IWDG and WWDG Watchdog timers in a hybrid structure to enhance system reliability.
+Variable processor load is simulated via an LDR sensor to test "Window Violation" scenarios.
+It performs "System Autopsy" at startup to report the root cause of resets (Software freeze vs. Sleep mode failure).
+Additionally, it demonstrates system security during low power consumption by managing Watchdogs in STOP mode.
+
+🔗 **Repo:** [harunkaraca65/DEM_SENTINEL_MODE](https://github.com/harunkaraca65/DEM_SENTINEL_MODE)
 
 ---
+
+## 🚧 Devam Eden Çalışmalar / Works in Progress
 
 ### 12. `STM32_BARE_METAL`
 **TR:**
