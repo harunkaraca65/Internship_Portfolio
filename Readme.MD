@@ -193,9 +193,26 @@ Additionally, it demonstrates system security during low power consumption by ma
 
 ---
 
+### 12. `DEMEDUKIT_BOOTLOADER`
+**TR:**
+Bu proje, Register seviyesinde kodlanmış bir OTA (Havadan Güncelleme) sistemidir.
+STM32 Flash hafızası Linker Script ile bölünmüş ve Vektör Tablosu (VTOR) kaydırılmıştır.
+64-bit Flash yazma zorunluluğu için özel hizalama algoritmaları ve "Dur-Bekle" iletişim protokolü geliştirilmiştir.
+CRC32 veri doğrulama ve OLED üzerinde görsel geri bildirim özelliklerine sahiptir.
+
+**EN:**
+This project is an OTA update system coded at the Register level.
+STM32 Flash memory is partitioned via Linker Script and the Vector Table (VTOR) is offset.
+Custom alignment algorithms for 64-bit Flash writes and a "Stop-and-Wait" protocol were developed.
+Features CRC32 data verification and visual feedback on OLED.
+
+🔗 **Repo:** [harunkaraca65/DEMEDUKIT_BOOTLOADER](https://github.com/harunkaraca65/DEMEDUKIT_BOOTLOADER)
+
+---
+
 ## 🚧 Devam Eden Çalışmalar / Works in Progress
 
-### 12. `STM32_BARE_METAL`
+### 13. `STM32_BARE_METAL`
 **TR:**
 Bu çalışma, hazır HAL kütüphaneleri kullanılmadan, doğrudan mikrodenetleyicinin kaydedicilerine (Registers) erişilerek yapılan programlamayı konu alır.
 GPIO yapılandırması, Clock ayarları ve çevresel birimlerin kontrolü "Bare Metal" yaklaşımıyla gerçekleştirilir.
@@ -208,7 +225,7 @@ This aims for complete mastery over the hardware and maximum optimization.
 
 ---
 
-### 13. `DEM_PLANE_SIM`
+### 14. `DEM_PLANE_SIM`
 **TR:**
 Bu final projesi, STM32 ve ESP32'nin birlikte çalıştığı kapsamlı bir uçuş simülasyon sistemidir.
 STM32 kartı, joystick ve sensör verilerini işleyerek bir uçuş kontrolcüsü (Flight Controller) gibi çalışır.
