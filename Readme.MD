@@ -22,14 +22,14 @@ Technical summaries of the projects and their corresponding repository names are
 **TR:**
 Bu proje, LIS2DW12 ivmeölçer sensöründen I2C protokolü ile ham veri okur.
 Okunan verilerden Roll ve Pitch açılarını hesaplar.
-Hesaplanan açı değerleri, ana döngüyü meşgul etmemek adına kesme tabanlı bir UART iletimi ile dış dünyaya aktarılır.
-Cihazın eğim durumu belirli eşik değerlerini aştığında uyarı LED'leri aktif hale getirilir.
+Hesaplanan açı değerleri, ana döngüyü meşgul etmemek adına kesme tabanlı UART iletimi ile direkt seri ekrana aktarılır.
+Cihaz 0 dengesi bozulduğunda LED yakar.
 
 **EN:**
 This project reads raw data from the LIS2DW12 accelerometer sensor via the I2C protocol.
 It calculates Roll and Pitch angles from the read data.
-Calculated angle values are transmitted externally via interrupt-based UART transmission to avoid stalling the main loop.
-Warning LEDs are activated when the device's tilt status exceeds certain threshold values.
+Calculated angle values are directly transmitted to the serial screen via interrupt-based UART transmission to avoid stalling the main loop.
+The device turns on the LED when the 0 balance is disturbed.
 
 🔗 **Repo:** [harunkaraca65/DEM_ACC_ANGLE](https://github.com/harunkaraca65/DEM_ACC_ANGLE)
 
@@ -37,16 +37,14 @@ Warning LEDs are activated when the device's tilt status exceeds certain thresho
 
 ### 2. `DEM_ADC_COMPARISON`
 **TR:**
-Proje, STM32 ADC biriminden veri okumak için dört farklı yöntemi karşılaştırır.
-Polling, DMA Normal, DMA Circular ve Timer Trigger yöntemlerini uygular.
-Her bir yöntemin işlemci yükü üzerindeki etkisi analiz edilir.
-Elde edilen veriler bellekteki tampon dizilere kaydedilerek en uygun okuma stratejisi belirlenir.
+Proje, STM32 ADC birimini kullanmak için dört farklı yöntem (Polling, DMA Normal, DMA Circular, Timer Trigger) sunar.
+Kullanıcı, `guide.c` dosyası üzerinden istediği okuma modunu seçerek projeyi derler.
+Bu sayede farklı yöntemlerin işlemci yükü ve kod yapısı üzerindeki etkileri manuel olarak gözlemlenebilir.
 
 **EN:**
-The project compares four different methods for reading data from the STM32 ADC unit.
-It implements Polling, DMA Normal, DMA Circular, and Timer Trigger methods.
-The impact of each method on processor load is analyzed.
-Acquired data is saved to buffer arrays in memory to determine the most suitable reading strategy.
+The project offers four different methods (Polling, DMA Normal, DMA Circular, Timer Trigger) to use the STM32 ADC unit.
+The user selects and compiles the desired reading mode via the `guide.c` file.
+This allows manual observation of the effects of different methods on processor load and code structure.
 
 🔗 **Repo:** [harunkaraca65/DEM_ADC_COMPARISON](https://github.com/harunkaraca65/DEM_ADC_COMPARISON)
 
